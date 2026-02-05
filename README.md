@@ -25,15 +25,15 @@ mySpotify is a full-stack music player that demonstrates core streaming app func
 - The repo also contains a SFML folder (binaries) alongside the Flask/pygame backend; the active backend implementation uses Flask and pygame as shown in backend/.
 
 ### Interface & Experience
-- **Dark Theme** — Spotify-inspired dark interface 
-- **Animated Visualizer** — Animated disco light effects in the UI
-- **Album Art Display** — Show artwork for each track
-- **Responsive Layout** — Works on desktop screens
-- **Smooth Animations** — Polished UI transitions and visual feedback
+- **Dark Theme**, Spotify-inspired dark interface 
+- **Animated Visualizer**, Animated disco light effects in the UI
+- **Album Art Display**, Show artwork for each track
+- **Responsive Layout**, Works on desktop screens
+- **Smooth Animations**, Polished UI transitions and visual feedback
 
 ### Data Management
-- **JSON-Based Library** — Songs and playlists stored in `library.json`
-- **Local Audio Storage** — Music files kept in `assets/songs/` directory
+- **JSON-Based Library** Songs and playlists stored in `library.json`
+- **Local Audio Storage** Music files kept in `assets/songs/` directory
 
 ---
 
