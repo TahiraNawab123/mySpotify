@@ -1,7 +1,7 @@
 # 🎵 mySpotify
 This is a Spotify-inspired music player.
 
-## 📋 Project Overview
+## Project Overview
  
 **mySpotify** is a lightweight music-streaming style application that allows users to browse songs, play audio tracks, and manage playlists.
 
@@ -9,7 +9,7 @@ mySpotify is a full-stack music player that demonstrates core streaming app func
 
 ---
 
-## ✨ Implemented Features
+## Implemented Features
 
 - Play, pause, resume and stop audio playback
 - Skip to next and previous tracks
@@ -25,19 +25,19 @@ mySpotify is a full-stack music player that demonstrates core streaming app func
 - The repo also contains a SFML folder (binaries) alongside the Flask/pygame backend; the active backend implementation uses Flask and pygame as shown in backend/.
 
 ### Interface & Experience
-- 🎨 **Dark Theme** — Spotify-inspired dark interface 
-- 🌠 **Animated Visualizer** — Animated disco light effects in the UI
-- 🎼 **Album Art Display** — Show artwork for each track
-- 📱 **Responsive Layout** — Works on desktop screens
-- ✨ **Smooth Animations** — Polished UI transitions and visual feedback
+- **Dark Theme** — Spotify-inspired dark interface 
+- **Animated Visualizer** — Animated disco light effects in the UI
+- **Album Art Display** — Show artwork for each track
+- **Responsive Layout** — Works on desktop screens
+- **Smooth Animations** — Polished UI transitions and visual feedback
 
 ### Data Management
-- 💾 **JSON-Based Library** — Songs and playlists stored in `library.json`
-- 📂 **Local Audio Storage** — Music files kept in `assets/songs/` directory
+- **JSON-Based Library** — Songs and playlists stored in `library.json`
+- **Local Audio Storage** — Music files kept in `assets/songs/` directory
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 # Frontend
 - Next.js + React (TypeScript)
@@ -55,7 +55,7 @@ mySpotify is a full-stack music player that demonstrates core streaming app func
 - pip for Python backend dependencies
 - Makefile included for convenience tasks
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 mySpotify/
@@ -135,7 +135,7 @@ python app.py
 npm run dev
 ```
 
-## 📌 How to Use
+## How to Use
 
 1. **Browse the Library** — View all available songs on the main page
 2. **Play a Song** — Click the play button on any track
@@ -146,7 +146,7 @@ npm run dev
 
 ---
 
-## 🐛 Known Issues & Work in Progress
+## Known Issues & Work in Progress
 
 - **Playlist Creation UI** — Backend supports playlists, but frontend UI for creation is partial
 - **Search Functionality** — Not yet implemented
@@ -157,7 +157,7 @@ npm run dev
 
 ---
 
-## 🎯 Future Improvements
+## Future Improvements
 
 - **Search & Filter** — Search songs by title, artist, or album
 - **Shuffle & Repeat** — Add playback mode options
