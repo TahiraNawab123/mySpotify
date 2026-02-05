@@ -19,7 +19,7 @@ class PlayerSignals(QObject):
     state_changed = pyqtSignal()
     position_updated = pyqtSignal(float, float)
 
-class MiniSpotify(QMainWindow):
+class MySpotify(QMainWindow):
     def __init__(self):
         super().__init__()
         self.player = Player()
@@ -38,7 +38,7 @@ class MiniSpotify(QMainWindow):
     
     def init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("MiniSpotify")
+        self.setWindowTitle("MySpotify")
         self.setGeometry(100, 100, 900, 700)
         
         # Main widget and layout
@@ -357,7 +357,7 @@ def main():
     # Set application style
     app.setStyle('Fusion')
     
-    window = MiniSpotify()
+    window = MySpotify()
     window.show()
     
     sys.exit(app.exec())

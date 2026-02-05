@@ -1,6 +1,8 @@
 #include "playlist.h"
 #include <iostream>
 #include <iomanip>
+#include <iostream>
+using namespace std;
 
 Playlist::Playlist() : currentIndex(-1) {}
 
@@ -83,19 +85,19 @@ bool Playlist::isEmpty() const {
 
 void Playlist::displayPlaylist() const {
     if (isEmpty()) {
-        std::cout << "Playlist is empty!" << std::endl;
+        cout << "Playlist is empty!" << endl;
         return;
     }
     
-    std::cout << "\n========== PLAYLIST ==========" << std::endl;
+    cout << "\n========== PLAYLIST ==========" << endl;
     for (size_t i = 0; i < songs.size(); ++i) {
-        std::string marker = (i == static_cast<size_t>(currentIndex)) ? " > " : "   ";
-        std::cout << marker << std::setw(3) << (i + 1) << ". " 
-                  << songs[i].title << " - " << songs[i].artist << std::endl;
+        string marker = (i == static_cast<size_t>(currentIndex)) ? " > " : "   ";
+        cout << marker << setw(3) << (i + 1) << ". " 
+                  << songs[i].title << " - " << songs[i].artist << endl;
     }
-    std::cout << "=============================" << std::endl;
+    cout << "=============================" << endl;
 }
 
-std::vector<Song>& Playlist::getAllSongs() {
+vector<Song>& Playlist::getAllSongs() {
     return songs;
 }

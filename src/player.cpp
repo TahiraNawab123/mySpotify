@@ -7,9 +7,9 @@ Player::~Player() {
     stop();
 }
 
-bool Player::loadSong(const std::string& filePath, const std::string& title) {
+bool Player::loadSong(const string& filePath, const string& title) {
     if (!music.openFromFile(filePath)) {
-        std::cerr << "Error: Could not load song from " << filePath << std::endl;
+        cerr << "Error: Could not load song from " << filePath << endl;
         return false;
     }
     currentSongPath = filePath;

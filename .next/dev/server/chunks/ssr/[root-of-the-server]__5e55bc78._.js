@@ -72,7 +72,7 @@ var __TURBOPACK__imported__module__$5b$next$5d2f$internal$2f$font$2f$google$2f$g
 ;
 ;
 const metadata = {
-    title: 'MiniSpotify - Music Player',
+    title: 'MySpotify - Music Player',
     description: 'A beautiful web-based music player inspired by Spotify'
 };
 const viewport = {

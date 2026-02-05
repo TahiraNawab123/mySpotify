@@ -1,1 +1,4 @@
 #mySpotify ignore list
+.next/
+node_modules/
+.env

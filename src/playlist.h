@@ -4,18 +4,21 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <iostream>
+using namespace std;
+
 
 struct Song {
-    std::string title;
-    std::string artist;
-    std::string filePath;
-    std::string albumArtPath;
+    string title;
+    string artist;
+    string filePath;
+    string albumArtPath;
     float duration;
 };
 
 class Playlist {
 private:
-    std::vector<Song> songs;
+    vector<Song> songs;
     int currentIndex;
     
 public:
@@ -42,7 +45,7 @@ public:
     void displayPlaylist() const;
     
     // Utility
-    std::vector<Song>& getAllSongs();
+    vector<Song>& getAllSongs();
 };
 
 #endif

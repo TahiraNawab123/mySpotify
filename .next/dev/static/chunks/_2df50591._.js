@@ -22,6 +22,7 @@ var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
+// Extended song list with 12 tracks
 const SAMPLE_SONGS = [
     {
         id: '1',
@@ -29,7 +30,8 @@ const SAMPLE_SONGS = [
         artist: 'The Weeknd',
         album: 'After Hours',
         duration: 200,
-        liked: false
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop'
     },
     {
         id: '2',
@@ -37,7 +39,8 @@ const SAMPLE_SONGS = [
         artist: 'Dua Lipa',
         album: 'Future Nostalgia',
         duration: 203,
-        liked: false
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop'
     },
     {
         id: '3',
@@ -45,7 +48,89 @@ const SAMPLE_SONGS = [
         artist: 'Lizzo',
         album: 'Cuz I Love You',
         duration: 206,
-        liked: false
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop'
+    },
+    {
+        id: '4',
+        title: 'Watermelon Sugar',
+        artist: 'Harry Styles',
+        album: 'Fine Line',
+        duration: 174,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop'
+    },
+    {
+        id: '5',
+        title: 'Don\'t Start Now',
+        artist: 'Dua Lipa',
+        album: 'Future Nostalgia',
+        duration: 183,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&h=400&fit=crop'
+    },
+    {
+        id: '6',
+        title: 'Circles',
+        artist: 'Post Malone',
+        album: 'Hollywood\'s Bleeding',
+        duration: 215,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop'
+    },
+    {
+        id: '7',
+        title: 'Say So',
+        artist: 'Doja Cat',
+        album: 'Hot Pink',
+        duration: 237,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop'
+    },
+    {
+        id: '8',
+        title: 'Savage',
+        artist: 'Megan Thee Stallion',
+        album: 'Suga',
+        duration: 179,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop'
+    },
+    {
+        id: '9',
+        title: 'Intentions',
+        artist: 'Justin Bieber',
+        album: 'Changes',
+        duration: 193,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop'
+    },
+    {
+        id: '10',
+        title: 'Adore You',
+        artist: 'Harry Styles',
+        album: 'Fine Line',
+        duration: 207,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop'
+    },
+    {
+        id: '11',
+        title: 'The Box',
+        artist: 'Roddy Ricch',
+        album: 'Please Excuse Me',
+        duration: 196,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&h=400&fit=crop'
+    },
+    {
+        id: '12',
+        title: 'Stuck with U',
+        artist: 'Ariana Grande & Justin Bieber',
+        album: 'Stuck with U',
+        duration: 228,
+        liked: false,
+        imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop'
     }
 ];
 function formatTime(seconds) {
@@ -58,13 +143,116 @@ function Home() {
     const [currentSongIndex, setCurrentSongIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [isPlaying, setIsPlaying] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [progress, setProgress] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [currentTime, setCurrentTime] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [duration, setDuration] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [volume, setVolume] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(70);
     const [songs, setSongs] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(SAMPLE_SONGS);
     const [playlist] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(SAMPLE_SONGS.map({
         "Home.useState": (s)=>s.id
     }["Home.useState"]));
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const audioRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const nextSongRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null) // Preload next song
+    ;
     const currentSong = songs.find((s)=>s.id === playlist[currentSongIndex]);
+    // Get audio source URL - using placeholder URLs that can be replaced with actual MP3 files
+    const getAudioSrc = (songId)=>{
+        // Try local file first, fallback to demo URL
+        return `/songs/${songId}.mp3`;
+    };
+    // Update audio source when song changes
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Home.useEffect": ()=>{
+            const audio = audioRef.current;
+            if (!audio || !currentSong) return;
+            setIsLoading(true);
+            const src = getAudioSrc(currentSong.id);
+            // Reset progress when changing songs
+            setProgress(0);
+            setCurrentTime(0);
+            // Set new source
+            audio.src = src;
+            audio.load();
+            // Handle loaded metadata
+            const handleLoadedMetadata = {
+                "Home.useEffect.handleLoadedMetadata": ()=>{
+                    if (audio.duration && isFinite(audio.duration)) {
+                        setDuration(audio.duration);
+                        // Update song duration if it was wrong
+                        if (Math.abs(audio.duration - currentSong.duration) > 5) {
+                            setSongs({
+                                "Home.useEffect.handleLoadedMetadata": (prev)=>prev.map({
+                                        "Home.useEffect.handleLoadedMetadata": (s)=>s.id === currentSong.id ? {
+                                                ...s,
+                                                duration: Math.floor(audio.duration)
+                                            } : s
+                                    }["Home.useEffect.handleLoadedMetadata"])
+                            }["Home.useEffect.handleLoadedMetadata"]);
+                        }
+                    }
+                    setIsLoading(false);
+                }
+            }["Home.useEffect.handleLoadedMetadata"];
+            // Handle can play
+            const handleCanPlay = {
+                "Home.useEffect.handleCanPlay": ()=>{
+                    setIsLoading(false);
+                    if (isPlaying) {
+                        audio.play().catch({
+                            "Home.useEffect.handleCanPlay": (err)=>{
+                                console.error('Playback error:', err);
+                                setIsPlaying(false);
+                            }
+                        }["Home.useEffect.handleCanPlay"]);
+                    }
+                }
+            }["Home.useEffect.handleCanPlay"];
+            // Handle errors
+            const handleError = {
+                "Home.useEffect.handleError": ()=>{
+                    console.error('Audio load error for:', src);
+                    setIsLoading(false);
+                    setIsPlaying(false);
+                    // Try fallback demo URL
+                    if (!src.includes('http')) {
+                        audio.src = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${currentSong.id}.mp3`;
+                        audio.load();
+                    }
+                }
+            }["Home.useEffect.handleError"];
+            audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+            audio.addEventListener('canplay', handleCanPlay);
+            audio.addEventListener('error', handleError);
+            return ({
+                "Home.useEffect": ()=>{
+                    audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+                    audio.removeEventListener('canplay', handleCanPlay);
+                    audio.removeEventListener('error', handleError);
+                }
+            })["Home.useEffect"];
+        }
+    }["Home.useEffect"], [
+        currentSongIndex,
+        currentSong?.id
+    ]);
+    // Preload next song
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Home.useEffect": ()=>{
+            if (!nextSongRef.current) return;
+            const nextIndex = (currentSongIndex + 1) % playlist.length;
+            const nextSong = songs.find({
+                "Home.useEffect.nextSong": (s)=>s.id === playlist[nextIndex]
+            }["Home.useEffect.nextSong"]);
+            if (nextSong) {
+                nextSongRef.current.src = getAudioSrc(nextSong.id);
+                nextSongRef.current.load();
+            }
+        }
+    }["Home.useEffect"], [
+        currentSongIndex,
+        playlist,
+        songs
+    ]);
     // Update progress & handle song end
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
@@ -72,37 +260,68 @@ function Home() {
             if (!audio) return;
             const updateProgress = {
                 "Home.useEffect.updateProgress": ()=>{
-                    if (audio.duration) setProgress(audio.currentTime / audio.duration * 100);
+                    if (audio.duration && isFinite(audio.duration)) {
+                        const newProgress = audio.currentTime / audio.duration * 100;
+                        setProgress(newProgress);
+                        setCurrentTime(audio.currentTime);
+                    }
                 }
             }["Home.useEffect.updateProgress"];
             const handleEnded = {
                 "Home.useEffect.handleEnded": ()=>{
-                    setCurrentSongIndex({
-                        "Home.useEffect.handleEnded": (prev)=>(prev + 1) % playlist.length
-                    }["Home.useEffect.handleEnded"]);
+                    // Auto-play next song
+                    const nextIndex = (currentSongIndex + 1) % playlist.length;
+                    setCurrentSongIndex(nextIndex);
                     setIsPlaying(true);
                 }
             }["Home.useEffect.handleEnded"];
-            audio.addEventListener('timeupdate', updateProgress);
+            const handleTimeUpdate = {
+                "Home.useEffect.handleTimeUpdate": ()=>updateProgress()
+            }["Home.useEffect.handleTimeUpdate"];
+            const handleLoadedMetadata = {
+                "Home.useEffect.handleLoadedMetadata": ()=>{
+                    if (audio.duration && isFinite(audio.duration)) {
+                        setDuration(audio.duration);
+                    }
+                }
+            }["Home.useEffect.handleLoadedMetadata"];
+            audio.addEventListener('timeupdate', handleTimeUpdate);
             audio.addEventListener('ended', handleEnded);
+            audio.addEventListener('loadedmetadata', handleLoadedMetadata);
             return ({
                 "Home.useEffect": ()=>{
-                    audio.removeEventListener('timeupdate', updateProgress);
+                    audio.removeEventListener('timeupdate', handleTimeUpdate);
                     audio.removeEventListener('ended', handleEnded);
+                    audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
                 }
             })["Home.useEffect"];
         }
     }["Home.useEffect"], [
         currentSongIndex,
-        playlist
+        playlist.length
     ]);
     // Play/pause audio
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
-            if (isPlaying) audioRef.current?.play().catch({
-                "Home.useEffect": ()=>{}
-            }["Home.useEffect"]);
-            else audioRef.current?.pause();
+            const audio = audioRef.current;
+            if (!audio) return;
+            if (isPlaying) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then({
+                        "Home.useEffect": ()=>{
+                        // Autoplay started
+                        }
+                    }["Home.useEffect"]).catch({
+                        "Home.useEffect": (error)=>{
+                            console.error('Playback failed:', error);
+                            setIsPlaying(false);
+                        }
+                    }["Home.useEffect"]);
+                }
+            } else {
+                audio.pause();
+            }
         }
     }["Home.useEffect"], [
         isPlaying
@@ -110,29 +329,35 @@ function Home() {
     // Adjust volume
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
-            if (audioRef.current) audioRef.current.volume = volume / 100;
+            if (audioRef.current) {
+                audioRef.current.volume = volume / 100;
+            }
         }
     }["Home.useEffect"], [
         volume
     ]);
     const playNext = ()=>{
-        setCurrentSongIndex((prev)=>(prev + 1) % playlist.length);
+        const nextIndex = (currentSongIndex + 1) % playlist.length;
+        setCurrentSongIndex(nextIndex);
         setIsPlaying(true);
     };
     const playPrevious = ()=>{
-        setCurrentSongIndex((prev)=>(prev - 1 + playlist.length) % playlist.length);
+        const prevIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+        setCurrentSongIndex(prevIndex);
         setIsPlaying(true);
     };
     const toggleLike = (songId)=>{
-        setSongs(songs.map((s)=>s.id === songId ? {
-                ...s,
-                liked: !s.liked
-            } : s));
+        setSongs((prev)=>prev.map((s)=>s.id === songId ? {
+                    ...s,
+                    liked: !s.liked
+                } : s));
     };
     const handleProgressChange = (newProgress)=>{
-        if (audioRef.current?.duration) {
-            audioRef.current.currentTime = newProgress / 100 * audioRef.current.duration;
+        const audio = audioRef.current;
+        if (audio && audio.duration && isFinite(audio.duration)) {
+            audio.currentTime = newProgress / 100 * audio.duration;
             setProgress(newProgress);
+            setCurrentTime(audio.currentTime);
         }
     };
     const handleSelectSong = (songId)=>{
@@ -142,173 +367,140 @@ function Home() {
             setIsPlaying(true);
         }
     };
-    const currentTime = currentSong?.duration ? progress / 100 * currentSong.duration : 0;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-screen relative overflow-hidden",
+        className: "relative min-h-screen overflow-hidden",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "disco-background"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 96,
+                lineNumber: 324,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "disco-light disco-light-1"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 97,
+                lineNumber: 325,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "disco-light disco-light-2"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 98,
+                lineNumber: 326,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "disco-light disco-light-3"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 99,
+                lineNumber: 327,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "disco-light disco-light-4"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 100,
+                lineNumber: 328,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
                 ref: audioRef,
-                crossOrigin: "anonymous"
+                crossOrigin: "anonymous",
+                preload: "auto",
+                onError: (e)=>{
+                    console.error('Audio error:', e);
+                    setIsLoading(false);
+                }
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 102,
+                lineNumber: 331,
                 columnNumber: 7
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "fixed inset-0 -z-50",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute inset-0 bg-gradient-to-br from-black via-purple-950 to-black"
-                    }, void 0, false, {
-                        fileName: "[project]/app/page.tsx",
-                        lineNumber: 106,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-primary/20 to-transparent rounded-full blur-3xl animate-pulse",
-                        style: {
-                            animationDuration: '4s'
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/app/page.tsx",
-                        lineNumber: 107,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-900/20 to-transparent rounded-full blur-3xl animate-pulse",
-                        style: {
-                            animationDuration: '5s',
-                            animationDelay: '1s'
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/app/page.tsx",
-                        lineNumber: 108,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-br from-purple-900/10 to-transparent rounded-full blur-3xl animate-pulse",
-                        style: {
-                            animationDuration: '6s',
-                            animationDelay: '2s'
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/app/page.tsx",
-                        lineNumber: 109,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
+                ref: nextSongRef,
+                preload: "auto",
+                style: {
+                    display: 'none'
+                }
+            }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 105,
+                lineNumber: 340,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative z-20 border-b border-white/10 backdrop-blur-md bg-black/30",
+                className: "relative z-20 border-b shadow-lg border-purple-500/20 backdrop-blur-xl bg-black/40 shadow-purple-900/20",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "px-8 py-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex items-baseline gap-2",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-4xl font-black text-white tracking-tighter",
+                                className: "text-4xl font-black tracking-tighter text-white",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        className: "text-primary",
-                                        children: "mini"
+                                        className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 animate-pulse",
+                                        children: "my"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 347,
                                         columnNumber: 15
                                     }, this),
                                     "Spotify"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 116,
+                                lineNumber: 346,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 115,
+                            lineNumber: 345,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-sm text-gray-400 mt-1",
+                            className: "mt-1 text-sm text-gray-400",
                             children: "Made by Tahira Nawab"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 120,
+                            lineNumber: 350,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 114,
+                    lineNumber: 344,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 113,
+                lineNumber: 343,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative z-10 flex h-[calc(100vh-80px)]",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-full lg:w-2/5 flex flex-col border-r border-white/5 overflow-hidden px-8 py-6",
+                        className: "flex flex-col w-full px-8 py-6 overflow-hidden border-r lg:w-2/5 sidebar-left border-purple-500/20",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "text-center mb-6",
+                                className: "mb-6 text-center",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                        className: "text-4xl font-black text-white mb-2 line-clamp-2",
+                                        className: "mb-2 text-4xl font-black text-white line-clamp-2 drop-shadow-lg",
                                         children: currentSong?.title || 'No Song'
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 130,
+                                        lineNumber: 360,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-xl text-primary mb-1",
+                                        className: "mb-1 text-xl font-semibold text-purple-400",
                                         children: currentSong?.artist || 'Unknown'
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 133,
+                                        lineNumber: 363,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -316,74 +508,99 @@ function Home() {
                                         children: currentSong?.album || 'No Album'
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 134,
+                                        lineNumber: 364,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 129,
+                                lineNumber: 359,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "mb-8 w-full max-w-xs mx-auto",
+                                className: "w-full max-w-xs mx-auto mb-8",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "aspect-square rounded-2xl overflow-hidden shadow-2xl relative",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "w-full h-full bg-gradient-to-br from-primary/40 via-purple-900/40 to-black flex items-center justify-center",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$music$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Music$3e$__["Music"], {
-                                                className: "w-24 h-24 text-primary/50"
+                                    className: "relative overflow-hidden border-2 shadow-2xl aspect-square rounded-2xl group border-purple-500/30",
+                                    children: [
+                                        currentSong?.imageUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                            src: currentSong.imageUrl,
+                                            alt: currentSong.title,
+                                            className: "object-cover w-full h-full"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 371,
+                                            columnNumber: 17
+                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex items-center justify-center w-full h-full bg-gradient-to-br from-purple-600/40 via-pink-600/40 to-black",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$music$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Music$3e$__["Music"], {
+                                                className: "w-24 h-24 text-purple-400/50"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 141,
-                                                columnNumber: 17
-                                            }, this),
-                                            isPlaying && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "absolute inset-0 bg-black/20 flex items-center justify-center",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex gap-1.5 items-end h-16",
-                                                    children: [
-                                                        15,
-                                                        24,
-                                                        18,
-                                                        22,
-                                                        16
-                                                    ].map((h, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "w-1.5 bg-primary rounded-full",
-                                                            style: {
-                                                                height: `${h}px`,
-                                                                animation: `pulse ${0.6 + i * 0.1}s ease-in-out infinite`
-                                                            }
-                                                        }, i, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 146,
-                                                            columnNumber: 25
-                                                        }, this))
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 144,
-                                                    columnNumber: 21
-                                                }, this)
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/page.tsx",
-                                                lineNumber: 143,
+                                                lineNumber: 378,
                                                 columnNumber: 19
                                             }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/app/page.tsx",
-                                        lineNumber: 140,
-                                        columnNumber: 15
-                                    }, this)
-                                }, void 0, false, {
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 377,
+                                            columnNumber: 17
+                                        }, this),
+                                        isLoading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "absolute inset-0 flex items-center justify-center bg-black/60",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "w-12 h-12 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 383,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 382,
+                                            columnNumber: 17
+                                        }, this),
+                                        isPlaying && !isLoading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex gap-1.5 items-end h-16",
+                                                children: [
+                                                    15,
+                                                    24,
+                                                    18,
+                                                    22,
+                                                    16,
+                                                    20,
+                                                    14
+                                                ].map((h, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "w-1.5 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50",
+                                                        style: {
+                                                            height: `${h}px`,
+                                                            animation: `equalizer ${0.4 + i * 0.1}s ease-in-out infinite`,
+                                                            animationDelay: `${i * 0.05}s`
+                                                        }
+                                                    }, i, false, {
+                                                        fileName: "[project]/app/page.tsx",
+                                                        lineNumber: 390,
+                                                        columnNumber: 23
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 388,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 387,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 139,
+                                    lineNumber: 369,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 138,
+                                lineNumber: 368,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -395,57 +612,60 @@ function Home() {
                                         max: "100",
                                         value: progress,
                                         onChange: (e)=>handleProgressChange(Number(e.target.value)),
-                                        className: "w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-primary hover:accent-primary transition-all"
+                                        className: "w-full h-2 transition-all rounded-full appearance-none cursor-pointer bg-white/10 accent-purple-500 hover:accent-purple-400 slider",
+                                        style: {
+                                            background: `linear-gradient(to right, rgb(124, 58, 237) 0%, rgb(124, 58, 237) ${progress}%, rgba(255,255,255,0.1) ${progress}%, rgba(255,255,255,0.1) 100%)`
+                                        }
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 161,
+                                        lineNumber: 408,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex justify-between text-xs text-gray-400 mt-2",
+                                        className: "flex justify-between mt-2 text-xs text-gray-400",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: formatTime(currentTime)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 170,
+                                                lineNumber: 420,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                children: currentSong ? formatTime(currentSong.duration) : '0:00'
+                                                children: currentSong ? formatTime(duration || currentSong.duration) : '0:00'
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 171,
+                                                lineNumber: 421,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 169,
+                                        lineNumber: 419,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 160,
+                                lineNumber: 407,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "border-t border-white/5 backdrop-blur-md bg-black/30 px-4 py-6 space-y-4",
+                                className: "px-4 py-6 space-y-4 border-t border-purple-500/20 backdrop-blur-xl bg-black/30 rounded-t-2xl",
                                 children: [
                                     currentSong && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>toggleLike(currentSong.id),
-                                        className: "w-full flex items-center justify-center py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all",
+                                        className: "flex items-center justify-center w-full py-3 transition-all border rounded-lg bg-white/5 hover:bg-white/10 border-purple-500/20 hover:border-purple-500/40 group",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
-                                            className: `w-6 h-6 transition-all ${currentSong.liked ? 'fill-red-500 text-red-500' : 'text-gray-400 group-hover:text-primary'}`
+                                            className: `w-6 h-6 transition-all ${currentSong.liked ? 'fill-red-500 text-red-500' : 'text-gray-400 group-hover:text-purple-400'}`
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 183,
+                                            lineNumber: 433,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 179,
+                                        lineNumber: 429,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -453,85 +673,85 @@ function Home() {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: playPrevious,
-                                                className: "p-3 hover:bg-white/10 rounded-full transition-all",
+                                                className: "p-3 transition-all border border-transparent rounded-full hover:bg-white/10 hover:border-purple-500/30",
                                                 "aria-label": "Previous",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$skip$2d$back$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SkipBack$3e$__["SkipBack"], {
                                                     className: "w-6 h-6 text-gray-400 hover:text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 194,
+                                                    lineNumber: 448,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 193,
+                                                lineNumber: 443,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: ()=>setIsPlaying(!isPlaying),
-                                                className: "p-4 bg-primary text-black rounded-full hover:shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 active:scale-95",
+                                                className: "p-4 text-white transition-all border-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-110 active:scale-95 border-purple-400/50",
                                                 "aria-label": isPlaying ? 'Pause' : 'Play',
                                                 children: isPlaying ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pause$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pause$3e$__["Pause"], {
-                                                    className: "w-7 h-7 fill-current"
+                                                    className: "fill-current w-7 h-7"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 202,
-                                                    columnNumber: 30
+                                                    lineNumber: 457,
+                                                    columnNumber: 19
                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$play$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Play$3e$__["Play"], {
                                                     className: "w-7 h-7 fill-current ml-0.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 202,
-                                                    columnNumber: 75
+                                                    lineNumber: 459,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 197,
+                                                lineNumber: 451,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: playNext,
-                                                className: "p-3 hover:bg-white/10 rounded-full transition-all",
+                                                className: "p-3 transition-all border border-transparent rounded-full hover:bg-white/10 hover:border-purple-500/30",
                                                 "aria-label": "Next",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$skip$2d$forward$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SkipForward$3e$__["SkipForward"], {
                                                     className: "w-6 h-6 text-gray-400 hover:text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 206,
+                                                    lineNumber: 468,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 205,
+                                                lineNumber: 463,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 192,
+                                        lineNumber: 442,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-center gap-3 bg-white/5 rounded-lg px-4 py-3",
+                                        className: "flex items-center gap-3 px-4 py-3 border rounded-lg bg-white/5 border-purple-500/20",
                                         children: [
                                             volume === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$volume$2d$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__VolumeX$3e$__["VolumeX"], {
                                                 className: "w-5 h-5 text-gray-400"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 212,
-                                                columnNumber: 31
+                                                lineNumber: 475,
+                                                columnNumber: 17
                                             }, this) : volume < 50 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$volume$2d$1$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Volume1$3e$__["Volume1"], {
                                                 className: "w-5 h-5 text-gray-400"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 212,
-                                                columnNumber: 93
+                                                lineNumber: 477,
+                                                columnNumber: 17
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$volume$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Volume2$3e$__["Volume2"], {
-                                                className: "w-5 h-5 text-primary"
+                                                className: "w-5 h-5 text-purple-400"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 212,
-                                                columnNumber: 141
+                                                lineNumber: 479,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "range",
@@ -539,74 +759,77 @@ function Home() {
                                                 max: "100",
                                                 value: volume,
                                                 onChange: (e)=>setVolume(Number(e.target.value)),
-                                                className: "flex-1 h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-primary"
+                                                className: "flex-1 h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-purple-500",
+                                                style: {
+                                                    background: `linear-gradient(to right, rgb(124, 58, 237) 0%, rgb(124, 58, 237) ${volume}%, rgba(255,255,255,0.1) ${volume}%, rgba(255,255,255,0.1) 100%)`
+                                                }
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 213,
+                                                lineNumber: 481,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-xs text-gray-400 w-8 text-right",
+                                                className: "w-8 text-xs text-right text-gray-400",
                                                 children: [
                                                     volume,
                                                     "%"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 221,
+                                                lineNumber: 492,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 211,
+                                        lineNumber: 473,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 176,
+                                lineNumber: 426,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 127,
+                        lineNumber: 357,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "hidden lg:flex lg:w-3/5 flex-col border-l border-white/5 overflow-hidden",
+                        className: "flex-col hidden overflow-hidden border-l lg:flex lg:w-3/5 sidebar-right border-purple-500/20",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "border-b border-white/5 backdrop-blur-md bg-black/30 px-8 py-6",
+                                className: "px-8 py-6 border-b border-purple-500/20 backdrop-blur-xl bg-black/30",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                         className: "text-2xl font-black text-white",
                                         children: "Playlist"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 500,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-sm text-gray-500 mt-1",
+                                        className: "mt-1 text-sm text-gray-500",
                                         children: [
                                             playlist.length,
                                             " songs"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 230,
+                                        lineNumber: 501,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 228,
+                                lineNumber: 499,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex-1 overflow-y-auto px-6 py-4",
+                                className: "flex-1 px-6 py-4 overflow-y-auto custom-scrollbar",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "space-y-2",
                                     children: playlist.map((songId, index)=>{
@@ -615,120 +838,155 @@ function Home() {
                                         const isCurrentSong = song.id === currentSong?.id;
                                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             onClick: ()=>handleSelectSong(songId),
-                                            className: `w-full text-left p-4 rounded-lg transition-all group ${isCurrentSong ? 'bg-primary/20 border border-primary/50' : 'bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10'}`,
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex items-center justify-between gap-3",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "flex-1 min-w-0 flex items-center gap-4",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: `text-sm font-semibold flex-shrink-0 w-6 text-center ${isCurrentSong ? 'text-primary' : 'text-gray-600'}`,
-                                                                children: index + 1
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/page.tsx",
-                                                                lineNumber: 252,
-                                                                columnNumber: 25
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: "flex-1 min-w-0",
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                        className: `font-semibold truncate ${isCurrentSong ? 'text-primary' : 'text-white'}`,
-                                                                        children: song.title
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/app/page.tsx",
-                                                                        lineNumber: 256,
-                                                                        columnNumber: 27
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                        className: "text-sm text-gray-500 truncate",
-                                                                        children: song.artist
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/app/page.tsx",
-                                                                        lineNumber: 257,
-                                                                        columnNumber: 27
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/app/page.tsx",
-                                                                lineNumber: 255,
-                                                                columnNumber: 25
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 251,
-                                                        columnNumber: 23
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        onClick: (e)=>{
-                                                            e.stopPropagation();
-                                                            toggleLike(song.id);
-                                                        },
-                                                        className: "p-2 opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
-                                                            className: `w-5 h-5 transition-all ${song.liked ? 'fill-red-500 text-red-500' : 'text-gray-500 hover:text-primary'}`
+                                            className: `w-full text-left p-4 rounded-lg transition-all group relative overflow-hidden ${isCurrentSong ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/20 border-2 border-purple-500/60 shadow-lg shadow-purple-500/30' : 'bg-white/5 hover:bg-white/10 border border-transparent hover:border-purple-500/30'}`,
+                                            children: [
+                                                isCurrentSong && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "absolute inset-0 bg-gradient-to-r from-purple-500/10 to-transparent animate-pulse"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 523,
+                                                    columnNumber: 23
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "relative z-10 flex items-center justify-between gap-3",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "flex items-center flex-1 min-w-0 gap-4",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    className: `text-sm font-semibold flex-shrink-0 w-6 text-center ${isCurrentSong ? 'text-purple-400' : 'text-gray-600'}`,
+                                                                    children: index + 1
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 528,
+                                                                    columnNumber: 25
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "flex-1 min-w-0",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                            className: `font-semibold truncate ${isCurrentSong ? 'text-purple-300' : 'text-white'}`,
+                                                                            children: song.title
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 532,
+                                                                            columnNumber: 27
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                            className: "text-sm text-gray-500 truncate",
+                                                                            children: song.artist
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 535,
+                                                                            columnNumber: 27
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 531,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 527,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        isCurrentSong && isPlaying && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "flex gap-0.5 items-end h-4 mr-2",
+                                                            children: [
+                                                                8,
+                                                                12,
+                                                                10,
+                                                                14,
+                                                                9,
+                                                                11
+                                                            ].map((h, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "w-0.5 bg-purple-400 rounded-full",
+                                                                    style: {
+                                                                        height: `${h}px`,
+                                                                        animation: `equalizer ${0.3 + i * 0.1}s ease-in-out infinite`,
+                                                                        animationDelay: `${i * 0.05}s`
+                                                                    }
+                                                                }, i, false, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 543,
+                                                                    columnNumber: 29
+                                                                }, this))
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 269,
+                                                            lineNumber: 541,
                                                             columnNumber: 25
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            onClick: (e)=>{
+                                                                e.stopPropagation();
+                                                                toggleLike(song.id);
+                                                            },
+                                                            className: "p-2 transition-opacity opacity-0 cursor-pointer group-hover:opacity-100 hover:scale-110",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
+                                                                className: `w-5 h-5 transition-all ${song.liked ? 'fill-red-500 text-red-500' : 'text-gray-500 hover:text-purple-400'}`
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 564,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 557,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-xs text-gray-600",
+                                                            children: formatTime(song.duration)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 573,
+                                                            columnNumber: 23
                                                         }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 262,
-                                                        columnNumber: 23
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-xs text-gray-600",
-                                                        children: formatTime(song.duration)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 274,
-                                                        columnNumber: 23
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/app/page.tsx",
-                                                lineNumber: 250,
-                                                columnNumber: 21
-                                            }, this)
-                                        }, songId, false, {
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 526,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, songId, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 241,
+                                            lineNumber: 512,
                                             columnNumber: 19
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 234,
+                                    lineNumber: 505,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 233,
+                                lineNumber: 504,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 227,
+                        lineNumber: 498,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 125,
+                lineNumber: 355,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 95,
-        columnNumber: 7
+        lineNumber: 322,
+        columnNumber: 5
     }, this);
 }
-_s(Home, "7RPKOf8LPLRKVXQuEi4YIxeZljU=");
+_s(Home, "EETUt0qwi0ABsdAByR3X/Yydl38=");
 _c = Home;
 var _c;
 __turbopack_context__.k.register(_c, "Home");
